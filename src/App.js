@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import ReactSwiper from "./components/ReactSwiper";
+import Player from "./components/Player";
+import words from "./words.json";
+import ControlPanel from "./components/ControlPanel";
+import useMultiCard from "./hooks/useMultiCard";
 
 function App() {
+  const [multiCardState, multiCardActions] = useMultiCard();
+
+  // console.log(state);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Player
+        lesson={words[0]}
+        multiCardActions={multiCardActions}
+        multiCardState={multiCardState}
+      />
+
+      <ReactSwiper
+        examples={words[0].data}
+        multiCardActions={multiCardActions}
+        multiCardState={multiCardState}
+      />
+
+      <ControlPanel
+        multiCardActions={multiCardActions}
+        multiCardState={multiCardState}
+      />
     </div>
   );
 }

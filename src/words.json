@@ -1,0 +1,510 @@
+[
+    {
+        "title": "Common English Words",
+        "source": "youtube",
+        "data": [
+            {
+                "word": "the",
+                "startTime": 65,
+                "endTime": 66.5
+            },
+            {
+                "word": "be",
+                "startTime": 69.5,
+                "endTime": 70.5
+            },
+            {
+                "word": "and",
+                "startTime": 74,
+                "endTime": 75
+            },
+            {
+                "word": "of",
+                "startTime": 79,
+                "endTime": 80
+            },
+            {
+                "word": "a",
+                "startTime": 83,
+                "endTime": 84
+            },
+            {
+                "word": "have",
+                "startTime": 87,
+                "endTime": 88
+            }
+            ,
+            {
+                "word": "to",
+                "startTime": 90,
+                "endTime": 91
+            },
+            {
+                "word": "it",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "I",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "for",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "you",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "he",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "with",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "do",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "say",
+                "startTime": "null",
+                "endTime": 5
+            }
+            ,
+            {
+                "word": "this",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "they",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "at",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "but",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "we",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "his",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "from",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "that",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "not",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "be",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "she",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "or",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "what",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "go",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "their",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "can",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "who",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "get",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "if",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "would",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "my",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "make",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "know",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "will",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "up",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "time",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "year",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "think",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "which",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "them",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "some",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "me",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "people",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "take",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "into",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "just",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "see",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "him",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "your",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "come",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "could",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "now",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "than",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "other",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "how",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "then",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "our",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "two",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "these",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "want",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "way",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "look",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "first",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "also",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "new",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "because",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "day",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "more",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "use",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "no",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "man",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "find",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "here",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "thing",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "give",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "many",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "well",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "those",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "tell",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "one",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "very",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "her",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "even",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "any",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "good",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "woman",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "through",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "us",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "life",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "child",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "there",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "down",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "may",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "should",
+                "startTime": "null",
+                "endTime": 5
+            },
+            {
+                "word": "call",
+                "startTime": "null",
+                "endTime": 5
+            }
+        ]
+    }
+]
