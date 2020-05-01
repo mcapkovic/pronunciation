@@ -1,0 +1,36 @@
+
+
+import React, { useState } from "react";
+import ReactSwiper from "./ReactSwiper";
+import Player from "./Player";
+import words from "./../words.json";
+import ControlPanel from "./ControlPanel";
+import useMultiCard from "../hooks/useMultiCard";
+
+function MultiCard(props) {
+  const [multiCardState, multiCardActions] = useMultiCard();
+
+  // console.log(state);
+  return (
+    <div>
+      <Player
+        lesson={props.lesson}
+        multiCardActions={multiCardActions}
+        multiCardState={multiCardState}
+      />
+
+      <ReactSwiper
+        examples={words[0].data}
+        multiCardActions={multiCardActions}
+        multiCardState={multiCardState}
+      />
+
+      <ControlPanel
+        multiCardActions={multiCardActions}
+        multiCardState={multiCardState}
+      />
+    </div>
+  );
+}
+
+export default MultiCard;
