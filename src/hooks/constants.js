@@ -9,3 +9,4 @@ export const SET_SOURCE_VOLUME = "setSourceVolume";
 export const SET_RECORD_VOLUME = "setRecordVolume";
 export const STOP_SOURCE_PLAY_AND_CONTINUE = "stopSourcePlayAndContinue";
 export const STOP_RECORDING_AND_CONTINUE = "stopRecordingAndContinue";
+export const TOGGLE_LESSON_PLAY = 'toggleLessonPlay'

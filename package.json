@@ -3,17 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@fortawesome/react-fontawesome": "^0.1.9",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "beautiful-react-hooks": "^0.23.1",
+    "node-sass": "^4.14.0",
     "react": "^16.13.1",
     "react-audio-player": "^0.13.0",
     "react-dom": "^16.13.1",
     "react-id-swiper": "^3.0.0",
-    "react-mic": "12.4.5",
+    "react-mic": "12.4.6",
     "react-player": "^1.15.3",
     "react-scripts": "3.4.1",
+    "react-transition-group": "^4.3.0",
     "swiper": "^5.3.8"
   },
   "scripts": {

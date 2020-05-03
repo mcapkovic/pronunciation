@@ -1,8 +1,13 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import Mic from "./Mic";
+import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
+import ButtonCircle from "./ButtonCircle";
 
 function ControlPanel(props) {
   const { multiCardActions, multiCardState } = props;
+  const { toggleLessonPlay } = multiCardActions;
+  const { lessonPlay } = multiCardState;
+
   return (
     <div>
       <Mic
@@ -10,8 +15,22 @@ function ControlPanel(props) {
         multiCardState={multiCardState}
       />
 
-      <button>ddd</button>
-      <button>aaaa</button>
+      <ButtonCircle
+        onClick={() => toggleLessonPlay()}
+        icons={[
+          {
+            icon: faPlay,
+            isVisible: lessonPlay,
+          },
+          {
+            icon: faPause,
+            isVisible: !lessonPlay,
+          },
+        ]}
+      />
+
+      <input id="cardRepeat" type="checkbox" />
+      <label htmlFor="cardRepeat">repeat</label>
 
       <input
         type="range"

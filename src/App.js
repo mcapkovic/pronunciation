@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import words from "./words.json";
 import MultiCard from "./components/MultiCard";
-
+import './sass/main.scss'
 function App() {
   return (
     <div>

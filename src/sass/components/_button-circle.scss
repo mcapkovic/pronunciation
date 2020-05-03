@@ -1,0 +1,31 @@
+.button-circle {
+  position: relative;
+  margin: 50px;
+  border-radius: 50%;
+  border: 1px solid gray;
+  height: 70px;
+  width: 70px;
+
+  & .fa-play {
+    margin-left: 4px;
+  }
+
+  &:focus{
+      outline: 1px dashed #d2d2d2;
+  }
+}
+
+.button-circle__icon {
+  opacity: 1;
+  transition: all 300ms;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  &--hidden {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotateX(90deg);
+  }
+}

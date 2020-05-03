@@ -1,5 +1,12 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import Swiper from "react-id-swiper";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPlay,
+  faPause,
+  faStop,
+  faMicrophone,
+} from "@fortawesome/free-solid-svg-icons";
 
 const params = {
   slidesPerView: 3,
@@ -22,6 +29,7 @@ function ReactSwiper(props) {
     isRecordPlaying,
     isSourcePlaying,
     isRecording,
+    lessonPlay,
   } = props.multiCardState;
   const {
     setSourcePlay,
@@ -34,10 +42,9 @@ function ReactSwiper(props) {
 
   const [swiper, updateSwiper] = useState(null);
 
-  const changePosition = useCallback(
-    () => updatePosition(swiper.realIndex),
-    [swiper]
-  );
+  const changePosition = useCallback(() => updatePosition(swiper.realIndex), [
+    swiper,
+  ]);
 
   // Add event listeners for swiper after initializing
   useEffect(() => {
@@ -78,31 +85,58 @@ function ReactSwiper(props) {
           <h2 style={{ color: "white" }}>{example.word}</h2>
           {swiper && swiper.realIndex === index && (
             <>
-              <button
-                style={{ padding: "20px" }}
-                onClick={() => toggleSourcePlay()}
-                disabled={isRecording || isRecordPlaying}
-              >
-                {isSourcePlaying ? "stop" : "play"}
-              </button>
+              {!lessonPlay ? (
+                <div>
+                  <button
+                    onClick={() => toggleSourcePlay()}
+                    disabled={isRecording || isRecordPlaying}
+                  >
+                    {isSourcePlaying ? (
+                      <FontAwesomeIcon size="4x" icon={faPause} />
+                    ) : (
+                      <FontAwesomeIcon size="4x" icon={faPlay} />
+                    )}
+                  </button>
 
-              <div>
-                <button
-                  style={{ padding: "20px" }}
-                  onClick={() => toggleRecording()}
-                  disabled={isSourcePlaying || isRecordPlaying}
-                >
-                  {isRecording ? "stop" : "record"}
-                </button>
+                  <button
+                    onClick={() => toggleRecording()}
+                    disabled={isSourcePlaying || isRecordPlaying}
+                  >
+                    {isRecording ? (
+                      <FontAwesomeIcon size="4x" icon={faStop} />
+                    ) : (
+                      <FontAwesomeIcon size="4x" icon={faMicrophone} />
+                    )}
+                  </button>
 
-                <button
-                  style={{ padding: "20px" }}
-                  onClick={() => toggleRecordPlay()}
-                  disabled={isSourcePlaying || isRecording}
-                >
-                  {isRecordPlaying ? "stop" : "play record"}
-                </button>
-              </div>
+                  <button
+                    onClick={() => toggleRecordPlay()}
+                    disabled={isSourcePlaying || isRecording}
+                  >
+                    {isRecordPlaying ? (
+                      <FontAwesomeIcon size="4x" icon={faStop} />
+                    ) : (
+                      <FontAwesomeIcon size="4x" icon={faPlay} />
+                    )}
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  {isSourcePlaying && "listen"}
+                  {isRecording && (
+                    <div>
+                      repeat
+                      <button
+                        onClick={() => toggleRecording()}
+                        disabled={isSourcePlaying || isRecordPlaying}
+                      >
+                        stop
+                      </button>
+                    </div>
+                  )}
+                  {isRecordPlaying && "compare"}
+                </div>
+              )}
 
               <button
                 disabled={cardAutoplay}
