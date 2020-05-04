@@ -34,20 +34,20 @@ function ControlPanel(props) {
 
       <input
         type="range"
-        onChange={(e) => multiCardActions.setSourceVolume(e.target.value)}
+        onChange={(e) => multiCardActions.setSourceVolume(Number(e.target.value))}
         value={multiCardState.sourceVolume}
-        min="0"
-        max="1"
-        step="0.1"
+        min={0}
+        max={1}
+        step={0.1}
       />
-      <input
+      {/* <input
         type="range"
         onChange={(e) => multiCardActions.setRecordVolume(e.target.value)}
-        value={multiCardState.recordVolume}
+        value={Number(multiCardState.recordVolume)}
         min="0"
         max="1"
         step="0.1"
-      />
+      /> */}
     </div>
   );
 }

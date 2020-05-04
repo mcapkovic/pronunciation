@@ -1,10 +1,13 @@
 .button-circle {
   position: relative;
-  margin: 50px;
+  margin: 5px;
   border-radius: 50%;
   border: 1px solid gray;
   height: 70px;
   width: 70px;
+
+  transition: opacity 200ms;
+
 
   & .fa-play {
     margin-left: 4px;
@@ -12,6 +15,10 @@
 
   &:focus{
       outline: 1px dashed #d2d2d2;
+  }
+
+  &:disabled{
+    opacity: 0.5;
   }
 }
 

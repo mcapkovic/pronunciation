@@ -3,7 +3,7 @@ import ReactPlayer from "react-player";
 
 function Player(props) {
   const { stopSourcePlayAndContinue, setSourcePlay } = props.multiCardActions;
-  const { cardAutoplay, currentCard, isSourcePlaying } = props.multiCardState;
+  const { cardAutoplay, currentCard, isSourcePlaying, sourceVolume } = props.multiCardState;
   const { lesson } = props;
   const player = useRef();
   const duration = useRef(0);
@@ -64,6 +64,7 @@ function Player(props) {
       onProgress={(e) => onProgress(e)}
       url="https://www.youtube.com/watch?v=IERJyt2qKh8"
       onDuration={onDuration}
+      volume={sourceVolume}
     />
   );
 }

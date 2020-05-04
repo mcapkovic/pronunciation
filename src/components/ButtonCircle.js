@@ -3,12 +3,12 @@ import React, { useState, useRef, useCallback, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function ButtonCircle(props) {
-  const { onClick, value, className, children, icons } = props;
+  const { className, children, icons, ...buttonProps } = props;
   return (
     <button
       className={`button-circle ${className}`}
-      onClick={onClick}
-      value={value}
+      {...buttonProps}
+      
     >
       {icons.map((icon) => {
         const { isVisible, iconClassName, ...awesomeIconProps } = icon;

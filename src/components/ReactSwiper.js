@@ -7,6 +7,7 @@ import {
   faStop,
   faMicrophone,
 } from "@fortawesome/free-solid-svg-icons";
+import ButtonCircle from "./ButtonCircle";
 
 const params = {
   slidesPerView: 3,
@@ -70,6 +71,38 @@ function ReactSwiper(props) {
   // }, [currentCard, cardAutoplay])
 
   // console.log("22");
+  const sourceIcons = [
+    {
+      icon: faPlay,
+      isVisible: isSourcePlaying,
+    },
+    {
+      icon: faPause,
+      isVisible: !isSourcePlaying,
+    },
+  ];
+
+  const recordIcons = [
+    {
+      icon: faStop,
+      isVisible: !isRecording,
+    },
+    {
+      icon: faMicrophone,
+      isVisible: isRecording,
+    },
+  ];
+
+  const recordPlayerIcons = [
+    {
+      icon: faPlay,
+      isVisible: isRecordPlaying,
+    },
+    {
+      icon: faStop,
+      isVisible: !isRecordPlaying,
+    },
+  ];
   return (
     <Swiper
       {...params}
@@ -87,38 +120,23 @@ function ReactSwiper(props) {
             <>
               {!lessonPlay ? (
                 <div>
-                  <button
+                  <ButtonCircle
                     onClick={() => toggleSourcePlay()}
                     disabled={isRecording || isRecordPlaying}
-                  >
-                    {isSourcePlaying ? (
-                      <FontAwesomeIcon size="4x" icon={faPause} />
-                    ) : (
-                      <FontAwesomeIcon size="4x" icon={faPlay} />
-                    )}
-                  </button>
+                    icons={sourceIcons}
+                  />
 
-                  <button
+                  <ButtonCircle
                     onClick={() => toggleRecording()}
                     disabled={isSourcePlaying || isRecordPlaying}
-                  >
-                    {isRecording ? (
-                      <FontAwesomeIcon size="4x" icon={faStop} />
-                    ) : (
-                      <FontAwesomeIcon size="4x" icon={faMicrophone} />
-                    )}
-                  </button>
+                    icons={recordIcons}
+                  />
 
-                  <button
+                  <ButtonCircle
                     onClick={() => toggleRecordPlay()}
                     disabled={isSourcePlaying || isRecording}
-                  >
-                    {isRecordPlaying ? (
-                      <FontAwesomeIcon size="4x" icon={faStop} />
-                    ) : (
-                      <FontAwesomeIcon size="4x" icon={faPlay} />
-                    )}
-                  </button>
+                    icons={recordPlayerIcons}
+                  />
                 </div>
               ) : (
                 <div>
@@ -126,12 +144,11 @@ function ReactSwiper(props) {
                   {isRecording && (
                     <div>
                       repeat
-                      <button
+                      <ButtonCircle
                         onClick={() => toggleRecording()}
                         disabled={isSourcePlaying || isRecordPlaying}
-                      >
-                        stop
-                      </button>
+                        icons={recordIcons}
+                      />
                     </div>
                   )}
                   {isRecordPlaying && "compare"}
