@@ -28,6 +28,7 @@ function MultiCard(props) {
       <ControlPanel
         multiCardActions={multiCardActions}
         multiCardState={multiCardState}
+        total={words[0].data.length}
       />
     </div>
   );

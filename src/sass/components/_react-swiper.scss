@@ -1,0 +1,22 @@
+.swiper-container {
+  margin: 10px;
+  .swiper-wrapper{
+    align-items: center;
+  }
+
+  .swiper-slide{
+    border: 1px solid gray ;
+    border-radius: 20px;
+    padding: 20px;
+    // height: 12rem;
+    // width: 20rem;
+
+    &__text{
+        color: gray;
+        text-align: center;
+        margin-top: 0px;
+        font-size: 2.5rem;
+        margin-bottom: 2px;
+    }
+  }
+}

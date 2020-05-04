@@ -44,19 +44,19 @@ function Recorder(props) {
     setRecordPlay(false);
   };
   return (
-    <div>
+    <div >
       <ReactMic
         record={isRecording}
         className="sound-wave"
         onStop={onStop}
         onData={onData}
-        strokeColor="#000000"
+        strokeColor="gray"
         backgroundColor="#ffffff"
         visualSetting="frequencyBars"
       />
       <div style={{ backgroundColor: "#000000" }}>
         <ReactAudioPlayer
-          controls
+          // controls
           src={isRecordPlaying ? blobURL : ""}
           autoPlay
           // onPlay={(e) => console.log("onPlay", e)}

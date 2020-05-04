@@ -53,8 +53,9 @@ function Player(props) {
 
   return (
     <ReactPlayer
+      className='source-player'
       ref={player}
-      controls
+      // controls
       playing={isSourcePlaying}
       onReady={() => console.log("onReady")}
       onBuffer={() => console.log("onBuffer")}
@@ -65,6 +66,10 @@ function Player(props) {
       url="https://www.youtube.com/watch?v=IERJyt2qKh8"
       onDuration={onDuration}
       volume={sourceVolume}
+      height={180}
+      width={320}
+      // height={'100%'}
+      // width={'100%'}
     />
   );
 }

@@ -17,10 +17,10 @@ const params = {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
   },
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
+  // pagination: {
+  //   el: ".swiper-pagination",
+  //   clickable: true,
+  // },
 };
 
 function ReactSwiper(props) {
@@ -31,6 +31,7 @@ function ReactSwiper(props) {
     isSourcePlaying,
     isRecording,
     lessonPlay,
+    lessonAutoplay,
   } = props.multiCardState;
   const {
     setSourcePlay,
@@ -108,14 +109,35 @@ function ReactSwiper(props) {
       {...params}
       noSwiping
       getSwiper={updateSwiper}
-      navigation={{
-        nextEl: isSourcePlaying ? "" : ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      }}
+      // containerClass='swiper-container '
+      // wrapperClass='aaaaaaaaaaaaaaaaaa'
+      // slideClass='bbbbbbbbbbbbbbb'
+      // pagination= {{
+      //   el: '.swiper-pagination',
+      //   clickable: true,
+      //   dynamicBullets: true
+      // }}
+
+    //   navigation={
+    //   //   {
+    //   //   // nextEl: lessonPlay ? "" : ".swiper-button-next",
+    //   //   // prevEl: lessonPlay ? "" :".swiper-button-prev",
+    //   //   // nextEl:".swiper-button-next",
+    //   //   // prevEl:".swiper-button-prev",
+    //   // }
+    
+    //   lessonPlay? null: {
+
+    //     nextEl:".swiper-button-next",
+    //     prevEl:".swiper-button-prev",
+    //   }
+      
+
+    // }
     >
       {props.examples.map((example, index) => (
-        <div key={index} style={{ backgroundColor: "blue" }}>
-          <h2 style={{ color: "white" }}>{example.word}</h2>
+        <div key={index} >
+          <p className='swiper-slide__text'>{example.word}</p>
           {swiper && swiper.realIndex === index && (
             <>
               {!lessonPlay ? (
@@ -155,13 +177,13 @@ function ReactSwiper(props) {
                 </div>
               )}
 
-              <button
+              {/* <button
                 disabled={cardAutoplay}
                 onClick={() => setCardAutoplay(!cardAutoplay)}
                 style={{ padding: "20px" }}
               >
                 {cardAutoplay ? "cardAutoplay on" : "cardAutoplay off"}
-              </button>
+              </button> */}
             </>
           )}
         </div>
