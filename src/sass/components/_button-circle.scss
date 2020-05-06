@@ -8,6 +8,9 @@
 
   transition: opacity 200ms;
 
+  &:hover{
+    background-color: #00000006;
+  }
 
   & .fa-play {
     margin-left: 4px;

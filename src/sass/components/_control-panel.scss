@@ -4,5 +4,21 @@
   width: 100%;
   &__controls {
     margin: 10px;
+    display: flex;
+    align-items: center;
+    &__volume{
+        margin-top: 10px;
+        margin-left: 32px;
+        display: flex;
+        flex-direction: column;
+        color:gray;
+        text-align: center;
+    }
+    &__summary{
+        margin-left: auto;
+        font-size: 25px;
+        color: gray;
+    }
   }
+
 }

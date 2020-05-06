@@ -21,6 +21,28 @@ const params = {
   //   el: ".swiper-pagination",
   //   clickable: true,
   // },
+  breakpoints: {
+    1200: {
+      slidesPerView: 4,
+      spaceBetween: 30
+    },
+    1024: {
+      slidesPerView: 3,
+      spaceBetween: 30
+    },
+    768: {
+      slidesPerView: 2.2,
+      spaceBetween: 30
+    },
+    640: {
+      slidesPerView: 1.8,
+      spaceBetween: 30
+    },
+    320: {
+      slidesPerView: 1,
+      spaceBetween: 0
+    }
+  }
 };
 
 function ReactSwiper(props) {
@@ -118,47 +140,53 @@ function ReactSwiper(props) {
       //   dynamicBullets: true
       // }}
 
-    //   navigation={
-    //   //   {
-    //   //   // nextEl: lessonPlay ? "" : ".swiper-button-next",
-    //   //   // prevEl: lessonPlay ? "" :".swiper-button-prev",
-    //   //   // nextEl:".swiper-button-next",
-    //   //   // prevEl:".swiper-button-prev",
-    //   // }
-    
-    //   lessonPlay? null: {
+      //   navigation={
+      //   //   {
+      //   //   // nextEl: lessonPlay ? "" : ".swiper-button-next",
+      //   //   // prevEl: lessonPlay ? "" :".swiper-button-prev",
+      //   //   // nextEl:".swiper-button-next",
+      //   //   // prevEl:".swiper-button-prev",
+      //   // }
 
-    //     nextEl:".swiper-button-next",
-    //     prevEl:".swiper-button-prev",
-    //   }
-      
+      //   lessonPlay? null: {
 
-    // }
+      //     nextEl:".swiper-button-next",
+      //     prevEl:".swiper-button-prev",
+      //   }
+
+      // }
     >
       {props.examples.map((example, index) => (
-        <div key={index} >
-          <p className='swiper-slide__text'>{example.word}</p>
+        <div key={index}>
+          <p className="swiper-slide__text">{example.word}</p>
           {swiper && swiper.realIndex === index && (
             <>
               {!lessonPlay ? (
-                <div>
-                  <ButtonCircle
-                    onClick={() => toggleSourcePlay()}
-                    disabled={isRecording || isRecordPlaying}
-                    icons={sourceIcons}
-                  />
+                <div className="swiper-slide__controls">
+                  <div className='swiper-slide__controls__source'>
+                    <ButtonCircle
+                      onClick={() => toggleSourcePlay()}
+                      disabled={isRecording || isRecordPlaying}
+                      icons={sourceIcons}
+                    />
+                    <span className='swiper-slide__controls__source__label'> source</span>
+                    
+                  </div>
 
-                  <ButtonCircle
-                    onClick={() => toggleRecording()}
-                    disabled={isSourcePlaying || isRecordPlaying}
-                    icons={recordIcons}
-                  />
-
-                  <ButtonCircle
-                    onClick={() => toggleRecordPlay()}
-                    disabled={isSourcePlaying || isRecording}
-                    icons={recordPlayerIcons}
-                  />
+                  <div className='swiper-slide__controls__record'>
+                    <ButtonCircle
+                      onClick={() => toggleRecording()}
+                      disabled={isSourcePlaying || isRecordPlaying}
+                      icons={recordIcons}
+                    />
+                    <ButtonCircle
+                      onClick={() => toggleRecordPlay()}
+                      disabled={isSourcePlaying || isRecording}
+                      icons={recordPlayerIcons}
+                    />
+                    <span  className='swiper-slide__controls__record__label'>record</span>
+                    
+                  </div>
                 </div>
               ) : (
                 <div>

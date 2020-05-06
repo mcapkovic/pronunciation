@@ -15,7 +15,7 @@ function ControlPanel(props) {
         multiCardState={multiCardState}
       />
 
-      <div className='control-panel__controls'>
+      <div className="control-panel__controls">
         <ButtonCircle
           onClick={() => toggleLessonPlay()}
           icons={[
@@ -33,20 +33,22 @@ function ControlPanel(props) {
         {/* <input id="cardRepeat" type="checkbox" />
         <label htmlFor="cardRepeat">repeat</label> */}
 
-source volume
-        <input
-          type="range"
-          onChange={(e) =>
-            multiCardActions.setSourceVolume(Number(e.target.value))
-          }
-          value={multiCardState.sourceVolume}
-          min={0}
-          max={1}
-          step={0.1}
-        />
-
-        {currentCard}/
-        {total}
+        <div className="control-panel__controls__volume">
+          <input
+            type="range"
+            onChange={(e) =>
+              multiCardActions.setSourceVolume(Number(e.target.value))
+            }
+            value={multiCardState.sourceVolume}
+            min={0}
+            max={1}
+            step={0.1}
+          />
+          <span>source volume</span>
+        </div>
+        <div className="control-panel__controls__summary">
+          {currentCard}/{total}
+        </div>
       </div>
     </div>
   );

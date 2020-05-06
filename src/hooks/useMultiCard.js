@@ -32,7 +32,7 @@ const initialState = {
   cardRepeat: false,
   lessonPlay: false,
   recordVolume: 1,
-  sourceVolume: 1,
+  sourceVolume: 0.5,
 };
 
 function reducer(state, action) {

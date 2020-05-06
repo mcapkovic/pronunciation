@@ -12,7 +12,7 @@ function MultiCard(props) {
 
   // console.log(state);
   return (
-    <div>
+    <div className='multi-card'>
       <Player
         lesson={props.lesson}
         multiCardActions={multiCardActions}
