@@ -9,9 +9,9 @@ function onData(recordedBlob) {
 }
 
 function Recorder(props) {
-  const { stopRecordingAndContinue, setRecordPlay } = props.multiCardActions;
+  const { setRecordPlay, stopRecordPlayAndContinue } = props.multiCardActions;
   const {
-    cardAutoplay,
+    lessonPlay ,
     currentCard,
     isRecording,
     isRecordPlaying,
@@ -22,26 +22,31 @@ function Recorder(props) {
   const onStop = (recordedBlob) => {
     console.log("recordedBlob is: ", recordedBlob);
     setBlobURL(recordedBlob.blobURL);
-    stopRecordingAndContinue();
   };
 
   // useEffect(()=>{
   //   // console.log('interval')
   //   // setTimeout(function(){ alert("Hello"); }, 3000);
 
-  //   if(isRecording && cardAutoplay){
+  //   if(isRecording && lessonPlay ){
   //     setTimeout(() =>{ stopRecordingAndContinue(); }, 3000);
 
   //   }
   // },[isRecording])
 
+  console.log(props.multiCardState)
   const onEnded = () => {
-    // if(cardAutoplay){
+    stopRecordPlayAndContinue()
+    // if(lessonPlay ){
+    //   stopRecordPlayAndContinue()
+    // }else{
+    //   setRecordPlay(false);
+    // }
     //   // setRecordPlay(false)
 
     //   stopRecordingAndContinue()
 
-    setRecordPlay(false);
+    
   };
   return (
     <div >

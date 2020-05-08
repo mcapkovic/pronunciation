@@ -10,16 +10,17 @@ import React, {
 import {
   TOGGLE_SOURCE_PLAY,
   SET_SOURCE_PLAY,
-  TOGGLE_RECORDING,
   TOGGLE_RECORD_PLAY,
   UPDATE_POSITION,
   SET_RECORD_PLAY,
   SET_CARD_AUTOPLAY,
   SET_SOURCE_VOLUME,
-  STOP_SOURCE_PLAY_AND_CONTINUE,
-  STOP_RECORDING_AND_CONTINUE,
   SET_RECORD_VOLUME,
   TOGGLE_LESSON_PLAY,
+  STOP_ALL,
+  STOP_RECORD_PLAY_AND_CONTINUE,
+  STOP_SOURCE_PLAY,
+  SET_RECORDING,
 } from "./constants";
 
 const initialState = {
@@ -28,7 +29,6 @@ const initialState = {
   isRecordPlaying: false,
   isSourcePlaying: false,
   cardAutoplay: false,
-  lessonAutoplay: false,
   cardRepeat: false,
   lessonPlay: false,
   recordVolume: 1,
@@ -41,27 +41,41 @@ function reducer(state, action) {
       return {
         ...state,
         isSourcePlaying: !state.isSourcePlaying,
-        cardAutoplay: false,
-        lessonAutoplay: false,
+        lessonPlay: false,
+        isRecording: false,
+        isRecordPlaying: false,
       };
-    case TOGGLE_RECORDING:
+    case STOP_SOURCE_PLAY:
       return {
         ...state,
-        isRecording: !state.isRecording,
-        cardAutoplay: false,
-        lessonAutoplay: false,
+        isSourcePlaying: false,
+        isRecording: state.lessonPlay,
+        isRecordPlaying: false,
       };
+
+    case SET_RECORDING:
+      return {
+        ...state,
+        isSourcePlaying: false,
+        isRecording: action.payload,
+        isRecordPlaying: !action.payload,
+      };
+
     case TOGGLE_RECORD_PLAY:
       return {
         ...state,
         isRecordPlaying: !state.isRecordPlaying,
-        cardAutoplay: false,
-        lessonAutoplay: false,
+        lessonPlay: false,
+        isRecording: false,
+        isSourcePlaying: false,
       };
+
     case SET_SOURCE_PLAY:
-      return { ...state, isSourcePlaying: action.payload };
+      return { ...state, isSourcePlaying: action.payload, lessonPlay: false };
+
     case SET_RECORD_PLAY:
       return { ...state, isRecordPlaying: action.payload };
+
     case UPDATE_POSITION:
       return {
         ...state,
@@ -69,29 +83,35 @@ function reducer(state, action) {
         isRecording: false,
         isRecordPlaying: false,
         isSourcePlaying: false,
-        cardAutoplay: false,
-        lessonAutoplay: false,
+        lessonPlay: false,
       };
-    case SET_CARD_AUTOPLAY:
-      return {
-        ...state,
-        cardAutoplay: action.payload,
-        isSourcePlaying: action.payload,
-      };
-
-    case STOP_SOURCE_PLAY_AND_CONTINUE:
-      return { ...state, isSourcePlaying: false, isRecording: true };
-
-    case STOP_RECORDING_AND_CONTINUE:
-      return { ...state, isRecording: false, isRecordPlaying: true };
 
     case SET_RECORD_VOLUME:
       return { ...state, recordVolume: action.payload };
+
     case SET_SOURCE_VOLUME:
       return { ...state, sourceVolume: action.payload };
 
     case TOGGLE_LESSON_PLAY:
-      return { ...state, lessonPlay: !state.lessonPlay };
+      return {
+        ...state,
+        lessonPlay: !state.lessonPlay,
+        isSourcePlaying: !state.lessonPlay,
+        isRecording: false,
+        isRecordPlaying: false,
+      };
+
+    case STOP_ALL:
+      return {
+        ...state,
+        lessonPlay: false,
+        isSourcePlaying: false,
+        isRecordPlaying: false,
+        isRecording: false,
+      };
+
+    case STOP_RECORD_PLAY_AND_CONTINUE:
+      return { ...state, isRecordPlaying: false, lessonPlay: false };
 
     default:
       throw new Error();
@@ -109,16 +129,17 @@ function useMultiCard() {
     return {
       toggleSourcePlay: hookDispatch(TOGGLE_SOURCE_PLAY),
       setSourcePlay: hookDispatch(SET_SOURCE_PLAY),
-      toggleRecording: hookDispatch(TOGGLE_RECORDING),
       toggleRecordPlay: hookDispatch(TOGGLE_RECORD_PLAY),
       updatePosition: hookDispatch(UPDATE_POSITION),
       setRecordPlay: hookDispatch(SET_RECORD_PLAY),
-      setCardAutoplay: hookDispatch(SET_CARD_AUTOPLAY),
       setSourceVolume: hookDispatch(SET_SOURCE_VOLUME),
       setRecordVolume: hookDispatch(SET_RECORD_VOLUME),
-      stopSourcePlayAndContinue: hookDispatch(STOP_SOURCE_PLAY_AND_CONTINUE),
-      stopRecordingAndContinue: hookDispatch(STOP_RECORDING_AND_CONTINUE),
+      stopRecordPlayAndContinue: hookDispatch(STOP_RECORD_PLAY_AND_CONTINUE),
       toggleLessonPlay: hookDispatch(TOGGLE_LESSON_PLAY),
+      stopAll: hookDispatch(STOP_ALL),
+
+      stopSourcePlay: hookDispatch(STOP_SOURCE_PLAY),
+      setRecording: hookDispatch(SET_RECORDING),
     };
   }
 

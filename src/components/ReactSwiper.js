@@ -24,31 +24,30 @@ const params = {
   breakpoints: {
     1200: {
       slidesPerView: 4,
-      spaceBetween: 30
+      spaceBetween: 30,
     },
     1024: {
       slidesPerView: 3,
-      spaceBetween: 30
+      spaceBetween: 30,
     },
     768: {
       slidesPerView: 2.2,
-      spaceBetween: 30
+      spaceBetween: 30,
     },
     640: {
       slidesPerView: 1.8,
-      spaceBetween: 30
+      spaceBetween: 30,
     },
     320: {
       slidesPerView: 1,
-      spaceBetween: 0
-    }
-  }
+      spaceBetween: 0,
+    },
+  },
 };
 
 function ReactSwiper(props) {
   const {
     currentCard,
-    cardAutoplay,
     isRecordPlaying,
     isSourcePlaying,
     isRecording,
@@ -57,11 +56,10 @@ function ReactSwiper(props) {
   } = props.multiCardState;
   const {
     setSourcePlay,
-    setCardAutoplay,
     toggleRecordPlay,
-    toggleRecording,
     toggleSourcePlay,
     updatePosition,
+    setRecording,
   } = props.multiCardActions;
 
   const [swiper, updateSwiper] = useState(null);
@@ -161,31 +159,34 @@ function ReactSwiper(props) {
           <p className="swiper-slide__text">{example.word}</p>
           {swiper && swiper.realIndex === index && (
             <>
-              {!lessonPlay ? (
+              {true ? (
                 <div className="swiper-slide__controls">
-                  <div className='swiper-slide__controls__source'>
+                  <div className="swiper-slide__controls__source">
                     <ButtonCircle
                       onClick={() => toggleSourcePlay()}
-                      disabled={isRecording || isRecordPlaying}
+                      disabled={isRecording || isRecordPlaying || lessonPlay}
                       icons={sourceIcons}
                     />
-                    <span className='swiper-slide__controls__source__label'> source</span>
-                    
+                    <span className="swiper-slide__controls__source__label">
+                      {" "}
+                      source
+                    </span>
                   </div>
 
-                  <div className='swiper-slide__controls__record'>
+                  <div className="swiper-slide__controls__record">
                     <ButtonCircle
-                      onClick={() => toggleRecording()}
+                      onClick={() => setRecording(!isRecording)}
                       disabled={isSourcePlaying || isRecordPlaying}
                       icons={recordIcons}
                     />
                     <ButtonCircle
                       onClick={() => toggleRecordPlay()}
-                      disabled={isSourcePlaying || isRecording}
+                      disabled={isSourcePlaying || isRecording || lessonPlay}
                       icons={recordPlayerIcons}
                     />
-                    <span  className='swiper-slide__controls__record__label'>record</span>
-                    
+                    <span className="swiper-slide__controls__record__label">
+                      record
+                    </span>
                   </div>
                 </div>
               ) : (
@@ -195,7 +196,7 @@ function ReactSwiper(props) {
                     <div>
                       repeat
                       <ButtonCircle
-                        onClick={() => toggleRecording()}
+                        onClick={() => setRecording(!isRecording)}
                         disabled={isSourcePlaying || isRecordPlaying}
                         icons={recordIcons}
                       />
@@ -204,14 +205,6 @@ function ReactSwiper(props) {
                   {isRecordPlaying && "compare"}
                 </div>
               )}
-
-              {/* <button
-                disabled={cardAutoplay}
-                onClick={() => setCardAutoplay(!cardAutoplay)}
-                style={{ padding: "20px" }}
-              >
-                {cardAutoplay ? "cardAutoplay on" : "cardAutoplay off"}
-              </button> */}
             </>
           )}
         </div>

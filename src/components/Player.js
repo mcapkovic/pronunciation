@@ -2,26 +2,28 @@ import React, { useRef, useEffect } from "react";
 import ReactPlayer from "react-player";
 
 function Player(props) {
-  const { stopSourcePlayAndContinue, setSourcePlay } = props.multiCardActions;
-  const { cardAutoplay, currentCard, isSourcePlaying, sourceVolume } = props.multiCardState;
+  const {
+    setSourcePlay,
+    stopAll,
+    stopSourcePlay,
+  } = props.multiCardActions;
+  const {
+    lessonPlay,
+    currentCard,
+    isSourcePlaying,
+    sourceVolume,
+  } = props.multiCardState;
   const { lesson } = props;
   const player = useRef();
   const duration = useRef(0);
 
   const onProgress = (e) => {
-    console.log("onProgress", e);
+
     const start = lesson.data[currentCard].startTime;
     const end = lesson.data[currentCard].endTime;
-    if (Math.abs(e.playedSeconds - start) > 2) setSourcePlay(false);
 
-    if (e.playedSeconds > end && cardAutoplay) {
-      console.log("stopSourcePlayAndContinue");
-      stopSourcePlayAndContinue();
-    } else if (e.playedSeconds > end) {
-      console.log("setSourcePlay");
-
-      setSourcePlay(false);
-    }
+    if (e.playedSeconds > end) stopSourcePlay();
+    if ( e.playedSeconds - start < -1) stopAll(); // stop if the source position is behind the start position
   };
 
   const updatePosition = () => {
@@ -51,9 +53,10 @@ function Player(props) {
     // player.current.seekTo(parseFloat(currentCard / 100));
   }, [currentCard, isSourcePlaying]);
 
+  console.log("isSourcePlaying", isSourcePlaying);
   return (
     <ReactPlayer
-      className='source-player'
+      className="source-player"
       ref={player}
       // controls
       playing={isSourcePlaying}
