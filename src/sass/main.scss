@@ -11,11 +11,7 @@
 //   'vendors/normalize';
 
 // 3. Base stuff
-// @import
-//   'base/base',
-//   'base/fonts',
-//   'base/typography',
-//   'base/helpers';
+@import "base/_normalize";
 
 // 4. Layout-related sections
 // @import
@@ -23,9 +19,12 @@
 //   'layout/footer';
 
 // 5. Components
-@import "./components/button-circle", "./components/control-panel",
-  "./components/react-swiper", "./components/react-player",
-  "./components/display";
+@import 
+    "./components/button-circle", 
+    "./components/control-panel",
+    "./components/react-swiper",
+    "./components/react-player",
+    "./components/display";
 
 // 6. Page-specific styles
 @import "./pages/multi-card";

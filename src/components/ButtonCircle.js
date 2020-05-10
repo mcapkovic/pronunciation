@@ -18,7 +18,7 @@ function ButtonCircle(props) {
             className={`button-circle__icon button-circle__icon--${
               isVisible ? "hidden" : "visible"
             } ${iconClassName}`}
-            size="4x"
+            size="3x"
             color="gray"
             {...awesomeIconProps}
           />
