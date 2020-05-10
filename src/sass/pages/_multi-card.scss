@@ -1,7 +1,8 @@
 .multi-card{
-    margin-top: 80px;
+    margin: 80px 2px 0 2px;
     display: flex;
     flex-direction: column;
     // justify-content: center;
     height: calc(100vh - 150px);
+    min-height: 600px;
 }
