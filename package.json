@@ -17,6 +17,7 @@
     "react-id-swiper": "^3.0.0",
     "react-mic": "12.4.6",
     "react-player": "^1.15.3",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-transition-group": "^4.3.0",
     "swiper": "^5.3.8"
