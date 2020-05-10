@@ -1,0 +1,11 @@
+.display {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  color: gray;
+  font-size: 30px;
+  &__message{
+    margin-top: 20px;
+
+  }
+}

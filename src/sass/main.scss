@@ -1,5 +1,35 @@
-@import './components/button-circle';
-@import './components/control-panel';
-@import './components/react-swiper';
-@import './components/react-player';
-@import './pages/multi-card';
+@charset "UTF-8";
+
+// 1. Configuration and helpers
+// @import
+//   'abstracts/variables',
+//   'abstracts/functions',
+//   'abstracts/mixins';
+
+// 2. Vendors
+// @import
+//   'vendors/normalize';
+
+// 3. Base stuff
+// @import
+//   'base/base',
+//   'base/fonts',
+//   'base/typography',
+//   'base/helpers';
+
+// 4. Layout-related sections
+// @import
+//   'layout/header',
+//   'layout/footer';
+
+// 5. Components
+@import "./components/button-circle", "./components/control-panel",
+  "./components/react-swiper", "./components/react-player",
+  "./components/display";
+
+// 6. Page-specific styles
+@import "./pages/multi-card";
+
+// // 7. Themes
+// @import
+//   'themes/default';

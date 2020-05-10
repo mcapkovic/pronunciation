@@ -169,7 +169,7 @@ function ReactSwiper(props) {
                 </div>
               ) : (
                 <div>
-                  {isSourcePlaying && "listen"}
+                  {/* {isSourcePlaying && "listen"}
                   {isRecording && (
                     <div>
                       repeat
@@ -180,7 +180,7 @@ function ReactSwiper(props) {
                       />
                     </div>
                   )}
-                  {isRecordPlaying && "compare"}
+                  {isRecordPlaying && "compare"} */}
                 </div>
               )}
             </>
