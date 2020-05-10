@@ -10,7 +10,6 @@ import useMultiCard from "../hooks/useMultiCard";
 function MultiCard(props) {
   const [multiCardState, multiCardActions] = useMultiCard();
 
-  // console.log(state);
   return (
     <div className='multi-card'>
       <Player

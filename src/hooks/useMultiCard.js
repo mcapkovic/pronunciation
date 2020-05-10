@@ -21,6 +21,8 @@ import {
   STOP_RECORD_PLAY_AND_CONTINUE,
   STOP_SOURCE_PLAY,
   SET_RECORDING,
+  STOP_RECORD_PLAY,
+  START_SOURCE_PLAY,
 } from "./constants";
 
 const initialState = {
@@ -38,6 +40,7 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case TOGGLE_SOURCE_PLAY:
+      console.log("TOGGLE_SOURCE_PLAY");
       return {
         ...state,
         isSourcePlaying: !state.isSourcePlaying,
@@ -46,14 +49,25 @@ function reducer(state, action) {
         isRecordPlaying: false,
       };
     case STOP_SOURCE_PLAY:
+      console.log("STOP_SOURCE_PLAY");
       return {
         ...state,
         isSourcePlaying: false,
         isRecording: state.lessonPlay,
         isRecordPlaying: false,
       };
+    case START_SOURCE_PLAY:
+      console.log("START_SOURCE_PLAY");
+      return {
+        ...state,
+        isSourcePlaying: true,
+        isRecording: false,
+        isRecordPlaying: false,
+      };
 
     case SET_RECORDING:
+      console.log("SET_RECORDING");
+
       return {
         ...state,
         isSourcePlaying: false,
@@ -62,6 +76,8 @@ function reducer(state, action) {
       };
 
     case TOGGLE_RECORD_PLAY:
+      console.log("TOGGLE_RECORD_PLAY");
+
       return {
         ...state,
         isRecordPlaying: !state.isRecordPlaying,
@@ -71,28 +87,40 @@ function reducer(state, action) {
       };
 
     case SET_SOURCE_PLAY:
+      console.log("SET_SOURCE_PLAY");
+
       return { ...state, isSourcePlaying: action.payload, lessonPlay: false };
 
     case SET_RECORD_PLAY:
+      console.log("SET_RECORD_PLAY");
+
       return { ...state, isRecordPlaying: action.payload };
 
     case UPDATE_POSITION:
+      console.log("UPDATE_POSITION");
+
       return {
         ...state,
         currentCard: action.payload,
         isRecording: false,
         isRecordPlaying: false,
         isSourcePlaying: false,
-        lessonPlay: false,
+        // lessonPlay: false,
       };
 
     case SET_RECORD_VOLUME:
+      console.log("SET_RECORD_VOLUME");
+
       return { ...state, recordVolume: action.payload };
 
     case SET_SOURCE_VOLUME:
+      console.log("SET_SOURCE_VOLUME");
+
       return { ...state, sourceVolume: action.payload };
 
     case TOGGLE_LESSON_PLAY:
+      console.log("TOGGLE_LESSON_PLAY");
+
       return {
         ...state,
         lessonPlay: !state.lessonPlay,
@@ -102,6 +130,8 @@ function reducer(state, action) {
       };
 
     case STOP_ALL:
+      console.log("STOP_ALL");
+
       return {
         ...state,
         lessonPlay: false,
@@ -111,7 +141,23 @@ function reducer(state, action) {
       };
 
     case STOP_RECORD_PLAY_AND_CONTINUE:
+      console.log("STOP_RECORD_PLAY_AND_CONTINUE");
+
       return { ...state, isRecordPlaying: false, lessonPlay: false };
+
+    case STOP_RECORD_PLAY:
+      console.log("STOP_RECORD_PLAY");
+
+      return {
+        ...state,
+        isRecordPlaying: false,
+        isSourcePlaying: false,
+        isRecording: false,
+        // lessonPlay: false,
+        currentCard: state.lessonPlay
+          ? state.currentCard + 1
+          : state.currentCard,
+      };
 
     default:
       throw new Error();
@@ -140,6 +186,8 @@ function useMultiCard() {
 
       stopSourcePlay: hookDispatch(STOP_SOURCE_PLAY),
       setRecording: hookDispatch(SET_RECORDING),
+      stopRecordPlay: hookDispatch(STOP_RECORD_PLAY),
+      startSourcePlay: hookDispatch(START_SOURCE_PLAY),
     };
   }
 

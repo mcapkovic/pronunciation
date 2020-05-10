@@ -2,11 +2,7 @@ import React, { useRef, useEffect } from "react";
 import ReactPlayer from "react-player";
 
 function Player(props) {
-  const {
-    setSourcePlay,
-    stopAll,
-    stopSourcePlay,
-  } = props.multiCardActions;
+  const { stopAll, stopSourcePlay, startSourcePlay } = props.multiCardActions;
   const {
     lessonPlay,
     currentCard,
@@ -18,12 +14,11 @@ function Player(props) {
   const duration = useRef(0);
 
   const onProgress = (e) => {
-
     const start = lesson.data[currentCard].startTime;
     const end = lesson.data[currentCard].endTime;
 
-    if (e.playedSeconds > end) stopSourcePlay();
-    if ( e.playedSeconds - start < -1) stopAll(); // stop if the source position is behind the start position
+    if (e.playedSeconds > end && isSourcePlaying) stopSourcePlay();
+    if (e.playedSeconds - start < -1 && isSourcePlaying) stopAll(); // stop if the source position is behind the start position
   };
 
   const updatePosition = () => {
@@ -35,36 +30,41 @@ function Player(props) {
     player.current.seekTo(parseFloat(position));
   };
 
+  // set position when video is loaded
   const onDuration = (videoDuration) => {
-    console.log("duration", videoDuration);
     duration.current = videoDuration;
     updatePosition();
   };
 
+  // reset position on play button click
   useEffect(() => {
-    // console.log(isSourcePlaying);
-    // console.log(currentCard);
+    if (player.current) {
+      updatePosition();
+    }
+  }, [isSourcePlaying]);
 
+  // set position on chard change
+  useEffect(() => {
+    // update source position on card change
     if (player.current) {
       updatePosition();
     }
 
-    // if (player.current) player.current.seekTo(parseFloat(currentCard / 100));
-    // player.current.seekTo(parseFloat(currentCard / 100));
-  }, [currentCard, isSourcePlaying]);
+    // start source on card change when lesson is playing
+    if (!isSourcePlaying && lessonPlay) startSourcePlay();
+  }, [currentCard]);
 
-  console.log("isSourcePlaying", isSourcePlaying);
   return (
     <ReactPlayer
       className="source-player"
       ref={player}
       // controls
       playing={isSourcePlaying}
-      onReady={() => console.log("onReady")}
-      onBuffer={() => console.log("onBuffer")}
-      onSeek={(e) => console.log("onSeek", e)}
-      onError={(e) => console.log("onError", e)}
-      onSeek={(e) => console.log("onSeek", e)}
+      // onReady={() => console.log("onReady")}
+      // onBuffer={() => console.log("onBuffer")}
+      // onSeek={(e) => console.log("onSeek", e)}
+      // onError={(e) => console.log("onError", e)}
+      // onSeek={(e) => console.log("onSeek", e)}
       onProgress={(e) => onProgress(e)}
       url="https://www.youtube.com/watch?v=IERJyt2qKh8"
       onDuration={onDuration}

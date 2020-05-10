@@ -52,10 +52,8 @@ function ReactSwiper(props) {
     isSourcePlaying,
     isRecording,
     lessonPlay,
-    lessonAutoplay,
   } = props.multiCardState;
   const {
-    setSourcePlay,
     toggleRecordPlay,
     toggleSourcePlay,
     updatePosition,
@@ -64,9 +62,24 @@ function ReactSwiper(props) {
 
   const [swiper, updateSwiper] = useState(null);
 
-  const changePosition = useCallback(() => updatePosition(swiper.realIndex), [
-    swiper,
-  ]);
+  const changePosition = useCallback(
+    () =>
+      currentCard !== swiper.realIndex
+        ? updatePosition(swiper.realIndex)
+        : null,
+    [swiper, currentCard]
+  );
+
+  const goNext = () => {
+    if (swiper !== null) {
+      swiper.slideNext();
+    }
+  };
+  const goPrev = () => {
+    if (swiper !== null) {
+      swiper.slidePrev();
+    }
+  };
 
   // Add event listeners for swiper after initializing
   useEffect(() => {
@@ -81,17 +94,11 @@ function ReactSwiper(props) {
     };
   }, [swiper, changePosition]);
 
-  // useEffect(()=>{
+  useEffect(() => {
+    if (swiper !== null && swiper.realIndex > currentCard) goPrev();
+    if (swiper !== null && swiper.realIndex < currentCard) goNext();
+  }, [currentCard]);
 
-  //   if(cardAutoplay){
-  //     setSourcePlay(true)
-  //   }
-
-  //   console.log('NEW position')
-
-  // }, [currentCard, cardAutoplay])
-
-  // console.log("22");
   const sourceIcons = [
     {
       icon: faPlay,
@@ -125,41 +132,13 @@ function ReactSwiper(props) {
     },
   ];
   return (
-    <Swiper
-      {...params}
-      noSwiping
-      getSwiper={updateSwiper}
-      // containerClass='swiper-container '
-      // wrapperClass='aaaaaaaaaaaaaaaaaa'
-      // slideClass='bbbbbbbbbbbbbbb'
-      // pagination= {{
-      //   el: '.swiper-pagination',
-      //   clickable: true,
-      //   dynamicBullets: true
-      // }}
-
-      //   navigation={
-      //   //   {
-      //   //   // nextEl: lessonPlay ? "" : ".swiper-button-next",
-      //   //   // prevEl: lessonPlay ? "" :".swiper-button-prev",
-      //   //   // nextEl:".swiper-button-next",
-      //   //   // prevEl:".swiper-button-prev",
-      //   // }
-
-      //   lessonPlay? null: {
-
-      //     nextEl:".swiper-button-next",
-      //     prevEl:".swiper-button-prev",
-      //   }
-
-      // }
-    >
+    <Swiper {...params} noSwiping getSwiper={updateSwiper}>
       {props.examples.map((example, index) => (
         <div key={index}>
           <p className="swiper-slide__text">{example.word}</p>
           {swiper && swiper.realIndex === index && (
             <>
-              {true ? (
+              {!lessonPlay ? (
                 <div className="swiper-slide__controls">
                   <div className="swiper-slide__controls__source">
                     <ButtonCircle
@@ -168,7 +147,6 @@ function ReactSwiper(props) {
                       icons={sourceIcons}
                     />
                     <span className="swiper-slide__controls__source__label">
-                      {" "}
                       source
                     </span>
                   </div>
@@ -209,10 +187,6 @@ function ReactSwiper(props) {
           )}
         </div>
       ))}
-      {/* <div style={{ backgroundColor: "green" }}>Slide #2</div>
-      <div style={{ backgroundColor: "orange" }}>Slide #3</div>
-      <div style={{ backgroundColor: "purple" }}>Slide #4</div>
-      <div style={{ backgroundColor: "pink" }}>Slide #5</div> */}
     </Swiper>
   );
 }

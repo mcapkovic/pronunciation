@@ -6,7 +6,7 @@ import ButtonCircle from "./ButtonCircle";
 function ControlPanel(props) {
   const { multiCardActions, multiCardState, total } = props;
   const { toggleLessonPlay } = multiCardActions;
-  const { lessonPlay, currentCard } = multiCardState;
+  const { lessonPlay, currentCard, isRecording } = multiCardState;
 
   return (
     <div className="control-panel">
@@ -18,6 +18,7 @@ function ControlPanel(props) {
       <div className="control-panel__controls">
         <ButtonCircle
           onClick={() => toggleLessonPlay()}
+          disabled={isRecording}
           icons={[
             {
               icon: faPlay,
