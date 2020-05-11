@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import words from "./words.json";
 import MultiCard from "./components/MultiCard";
+import NewLesson from './components/NewLesson';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./sass/main.scss";
 
@@ -15,6 +16,9 @@ function Dashboard() {
         <li>
           <Link to="/multicard">multicard</Link>
         </li>
+        <li>
+          <Link to="/newlesson">newlesson</Link>
+        </li>
       </ul>
     </nav>
   );
@@ -26,6 +30,9 @@ function App() {
       <Switch>
         <Route path="/multicard">
           <MultiCard lesson={words[0]} />
+        </Route>
+        <Route path="/newlesson">
+          <NewLesson lesson={words[0]} />
         </Route>
         <Route path="/">
           <Dashboard />
