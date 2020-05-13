@@ -36,7 +36,7 @@ const EditableCell = ({
     Cell: EditableCell,
   };
   // Be sure to pass our updateMyData and the skipPageReset option
-  function EditableTable({ columns, data, updateMyData, deleteRow, skipPageReset }) {
+  function EditableTable({ columns, data, updateMyData, deleteRow, skipPageReset, pagination= true }) {
     // For this example, we're using pagination to illustrate how to stop
     // the current page from resetting when our data changes
     // Otherwise, nothing is different here.
@@ -101,7 +101,8 @@ const EditableCell = ({
             })}
           </tbody>
         </table>
-        <div className="pagination">
+
+            {pagination &&         <div className="pagination">
           <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
             {"<<"}
           </button>{" "}
@@ -144,7 +145,10 @@ const EditableCell = ({
               </option>
             ))}
           </select>
-        </div>
+        </div>}
+
+
+
       </>
     );
   }

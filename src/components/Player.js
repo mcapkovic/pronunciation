@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import ReactPlayer from "react-player";
 
 function Player(props) {
+  const {multiCardActions, multiCardState, lesson ,...playerProps} = props;
   const { stopAll, stopSourcePlay, startSourcePlay } = props.multiCardActions;
   const {
     lessonPlay,
@@ -9,7 +10,6 @@ function Player(props) {
     isSourcePlaying,
     sourceVolume,
   } = props.multiCardState;
-  const { lesson } = props;
   const player = useRef();
   const duration = useRef(0);
 
@@ -73,6 +73,7 @@ function Player(props) {
       width={320}
       // height={'100%'}
       // width={'100%'}
+      {...playerProps}
     />
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import EditableTable from './EditableTable';
+import EditableTable from "./EditableTable";
 
 const Styles = styled.div`
   padding: 1rem;
@@ -44,7 +44,12 @@ const Styles = styled.div`
 
 const emptyRow = { startTime: "", endTime: "", word: "" };
 
-function NewLessonTable() {
+function NewLessonTable(props) {
+  const { toggleNewLessonSource } = props.multiCardActions;
+  const { isSourcePlaying, currentCard } = props.multiCardState;
+
+  const { data, setData } = props;
+
   const columns = React.useMemo(
     () => [
       {
@@ -71,7 +76,6 @@ function NewLessonTable() {
             Header: "delete",
             Cell: (cellProps) => {
               const { row, deleteRow } = cellProps;
-              console.log("cellProps", cellProps);
               return (
                 <button onClick={() => deleteRow(row.index)} on>
                   remove
@@ -81,19 +85,27 @@ function NewLessonTable() {
           },
           {
             Header: "play",
+            Cell: (cellProps) => {
+              const { row } = cellProps;
+
+              return (
+                <button onClick={() => toggleNewLessonSource(row.index)} on>
+                  {isSourcePlaying && cellProps.row.index === currentCard
+                    ? "stop"
+                    : "play"}
+                </button>
+              );
+            },
           },
         ],
       },
-      {
-        Header: "Player",
-      },
     ],
 
-    []
+    [isSourcePlaying]
   );
 
   //   const [data, setData] = React.useState(() => makeData(20))
-  const [data, setData] = React.useState([emptyRow]);
+  //   const [data, setData] = React.useState([emptyRow]);
 
   const [originalData] = React.useState(data);
   const [skipPageReset, setSkipPageReset] = React.useState(false);
@@ -132,20 +144,18 @@ function NewLessonTable() {
   const resetData = () => setData(originalData);
 
   const deleteRow = (rowIndex) => {
-      console.log(rowIndex)
-    const newData = [data];
-    console.log(newData)
+    const newData = [...data];
 
     // delete NewData[rowIndex];
     newData.splice(rowIndex, 1);
 
-    console.log(newData)
     setData(newData);
   };
+
   console.log(data);
   return (
     <Styles>
-      <button onClick={resetData}>Reset Data</button>
+      <button onClick={resetData}>Clear table</button>
       <button onClick={() => setData([...data, emptyRow])}>Add row</button>
 
       <EditableTable

@@ -14,3 +14,4 @@ export const STOP_SOURCE_PLAY = "stopSourcePlay";
 export const SET_RECORDING = "setRecording";
 export const STOP_RECORD_PLAY = "stopRecordPlay";
 export const START_SOURCE_PLAY = "startRecordPlay";
+export const TOGGLE_NEW_LESSON_SOURCE ='newLessonSourceToggle';

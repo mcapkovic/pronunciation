@@ -23,6 +23,7 @@ import {
   SET_RECORDING,
   STOP_RECORD_PLAY,
   START_SOURCE_PLAY,
+  TOGGLE_NEW_LESSON_SOURCE,
 } from "./constants";
 
 const initialState = {
@@ -159,6 +160,13 @@ function reducer(state, action) {
           : state.currentCard,
       };
 
+    case TOGGLE_NEW_LESSON_SOURCE:
+      return {
+        ...state,
+        isSourcePlaying: !state.isSourcePlaying,
+        currentCard: action.payload,
+      };
+
     default:
       throw new Error();
   }
@@ -188,6 +196,8 @@ function useMultiCard() {
       setRecording: hookDispatch(SET_RECORDING),
       stopRecordPlay: hookDispatch(STOP_RECORD_PLAY),
       startSourcePlay: hookDispatch(START_SOURCE_PLAY),
+
+      toggleNewLessonSource: hookDispatch(TOGGLE_NEW_LESSON_SOURCE),
     };
   }
 
