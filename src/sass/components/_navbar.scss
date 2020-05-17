@@ -1,0 +1,31 @@
+.navbar__hr{
+    width: 0;
+    transition: width 1s ease-in-out;
+    &--active{
+        width: 90%;
+    }
+
+    border-width: 1px 0;
+    
+
+}
+
+
+
+.nav-hr{
+    margin: 10px auto;
+    height: 1px;
+    width:90%;
+    
+
+    &__line{
+        height: 100%;
+        width:0;
+        transition: width 1s ease-in-out;
+
+        background-color: gray;
+        &--active{
+            width: 100%;
+        }
+    }
+}

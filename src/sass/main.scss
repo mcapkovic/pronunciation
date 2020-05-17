@@ -19,12 +19,9 @@
 //   'layout/footer';
 
 // 5. Components
-@import 
-    "./components/button-circle", 
-    "./components/control-panel",
-    "./components/react-swiper",
-    "./components/react-player",
-    "./components/display";
+@import "./components/navbar", "./components/button-circle",
+  "./components/control-panel", "./components/react-swiper",
+  "./components/react-player", "./components/display";
 
 // 6. Page-specific styles
 @import "./pages/multi-card";
