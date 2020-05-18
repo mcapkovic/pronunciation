@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, useRouteMatch, useHistory } from "react-router-dom";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function MainNavigation(props) {
   const { isExact: homePage } = useRouteMatch("/");
@@ -11,33 +13,28 @@ function MainNavigation(props) {
   const isHrActive = homePage;
   return (
     <>
-      {(newLesson || multiCard) && (
-        <button onClick={() => history.goBack()}>back</button>
-      )}
-      {homePage && (
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
+      <div className={`navbar navbar--${isHrActive ? "links" : "buttons"}`}>
+          <button onClick={() => history.goBack()} className="navbar__back">
+            <FontAwesomeIcon size="2x" color="gray" icon={faChevronLeft} />
+          </button>
+          <nav className="navbar__links">
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
 
-            <li>
-              <Link to="/multicard/0">multicard</Link>
-            </li>
-            <li>
-              <Link to="/newlesson">newlesson</Link>
-            </li>
-            <li>
-              <Link to="/quick-practice">Quick practice</Link>
-            </li>
-          </ul>
-        </nav>
-      )}
-
-      <hr
-        className={`navbar__hr navbar__hr--${homePage ? "active" : "hidden"}`}
-      />
-
+              <li> 
+                <Link to="/multicard/0">multicard</Link>
+              </li>
+              <li>
+                <Link to="/newlesson">newlesson</Link>
+              </li>
+              <li>
+                <Link to="/quick-practice">Quick practice</Link>
+              </li>
+            </ul>
+          </nav>
+      </div>
       <div className="nav-hr">
         <div
           className={`nav-hr__line nav-hr__line--${
@@ -45,6 +42,10 @@ function MainNavigation(props) {
           }`}
         />
       </div>
+
+      {/* <hr
+        className={`navbar__hr navbar__hr--${homePage ? "active" : "hidden"}`}
+      /> */}
     </>
   );
 }
