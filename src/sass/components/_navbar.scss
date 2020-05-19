@@ -60,17 +60,35 @@
       display: flex;
     }
 
-    a {
-      padding: 1.5em 2em;
+    &__link {
+      padding: 1.2em 1.2em;
       background-color: transparent;
-      transition: background-color 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
       color: gray;
       text-decoration: none;
-      &:visited {
-        color: gray;
+
+      &::before,
+      &::after {
+        transition: opacity 0.2s ease-in-out;
       }
+      &::before {
+        content: "> ";
+        opacity: 0;
+      }
+      &::after {
+        content: " <";
+        opacity: 0;
+      }
+
+      &--active {
+        &::before,
+        &::after {
+          opacity: 1;
+        }
+      }
+
       &:hover {
-        background-color: #0000000f;
+        text-decoration: underline;
       }
     }
   }

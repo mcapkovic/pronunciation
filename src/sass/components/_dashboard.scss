@@ -1,0 +1,30 @@
+.dashboard {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  flex-wrap: wrap;
+
+  &__card {
+    font-size: 24px;
+    width: 10em;
+    height: 7em;
+
+    border: 1px solid gray;
+    border-radius: 10px;
+    text-decoration: none;
+    display: flex;
+    margin: 0.5em;
+
+    &--dashed {
+      border-style: dashed;
+    }
+    &__text {
+      display: flex;
+      flex-grow: 1;
+      color: gray;
+      align-self: center;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+}
