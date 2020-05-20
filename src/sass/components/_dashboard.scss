@@ -15,13 +15,21 @@
     display: flex;
     margin: 0.5em;
 
+    background-color: transparent;
+    transition: all 0.3s ease;
+    color: gray;
+
+    &:hover {
+      transition: none;
+      transform: translate(0, -0.2em);
+    }
+
     &--dashed {
       border-style: dashed;
     }
     &__text {
       display: flex;
       flex-grow: 1;
-      color: gray;
       align-self: center;
       justify-content: center;
       text-align: center;
