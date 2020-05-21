@@ -53,51 +53,51 @@ function NewLessonTable(props) {
   const columns = React.useMemo(
     () => [
       {
-        Header: "Info",
-        columns: [
-          {
-            Header: "Word",
-            accessor: "word",
-          },
-          {
-            Header: "Start Time(s)",
-            accessor: "startTime",
-          },
-          {
-            Header: "End Time(s)",
-            accessor: "endTime",
-          },
-        ],
+        Header: "Word",
+        accessor: "word",
       },
       {
-        Header: "Actions",
-        columns: [
-          {
-            Header: "delete",
-            Cell: (cellProps) => {
-              const { row, deleteRow } = cellProps;
-              return (
-                <button onClick={() => deleteRow(row.index)} on>
-                  remove
-                </button>
-              );
-            },
-          },
-          {
-            Header: "play",
-            Cell: (cellProps) => {
-              const { row } = cellProps;
+        Header: "Start Time(s)",
+        accessor: "startTime",
+        inputType: "number",
+        inputAttributes: {
+          type: "number",
+          step: 0.2,
+        },
+      },
+      {
+        Header: "play",
+        Cell: (cellProps) => {
+          const { row } = cellProps;
 
-              return (
-                <button onClick={() => toggleNewLessonSource(row.index)} on>
-                  {isSourcePlaying && cellProps.row.index === currentCard
-                    ? "stop"
-                    : "play"}
-                </button>
-              );
-            },
-          },
-        ],
+          return (
+            <button onClick={() => toggleNewLessonSource(row.index)} on>
+              {isSourcePlaying && cellProps.row.index === currentCard
+                ? "stop"
+                : "play"}
+            </button>
+          );
+        },
+      },
+      {
+        Header: "End Time(s)",
+        accessor: "endTime",
+        inputAttributes: {
+          type: "number",
+          step: 0.2,
+        },
+      },
+
+      {
+        Header: "delete",
+        Cell: (cellProps) => {
+          const { row, deleteRow } = cellProps;
+          return (
+            <button disabled onClick={() => deleteRow(row.index)} on>
+              remove
+            </button>
+          );
+        },
       },
     ],
 
@@ -152,7 +152,7 @@ function NewLessonTable(props) {
     setData(newData);
   };
 
-  console.log(data);
+  // console.log(data);
   return (
     <Styles>
       <button onClick={resetData}>Clear table</button>

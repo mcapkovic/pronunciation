@@ -8,9 +8,10 @@ import { useTable, usePagination } from "react-table";
 const EditableCell = ({
     value: initialValue,
     row: { index },
-    column: { id },
+    column,
     updateMyData, // This is a custom function that we supplied to our table instance
   }) => {
+    const {id, inputAttributes = {}} = column
     // We need to keep and update the state of the cell normally
     const [value, setValue] = React.useState(initialValue);
   
@@ -28,7 +29,7 @@ const EditableCell = ({
       setValue(initialValue);
     }, [initialValue]);
   
-    return <input value={value} onChange={onChange} onBlur={onBlur} />;
+    return <input  {...inputAttributes} value={value} onChange={onChange} onBlur={onBlur}/>;
   };
   
   // Set our editable cell renderer as the default Cell renderer
