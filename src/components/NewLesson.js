@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect, useRef } from "react";
 import NewLessonTable from "./NewLessonTable";
 import Player from "./Player";
 import useMultiCard from "../hooks/useMultiCard";
+import Shortcuts from "./Shortcuts";
 
 const emptyRow = { startTime: "", endTime: "", word: "" };
 
@@ -46,6 +47,8 @@ function NewLesson(props) {
         height={360}
         width="100%"
       />
+
+      <Shortcuts multiCardActions={multiCardActions} />
 
       <NewLessonTable
         data={data}

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import EditableTable from "./EditableTable";
 
 const Styles = styled.div`
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
 
   table {
     border-spacing: 0;
@@ -20,7 +22,7 @@ const Styles = styled.div`
     th,
     td {
       margin: 0;
-      padding: 0.5rem;
+      padding: 0.2rem;
       border-bottom: 1px solid black;
       border-right: 1px solid black;
 
@@ -29,10 +31,21 @@ const Styles = styled.div`
       }
 
       input {
+        min-width: 1em;
+        width: 100%;
         font-size: 1rem;
-        padding: 0;
+        padding: 0.2em;
         margin: 0;
         border: 0;
+        :focus {
+          outline: 2px dashed rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      button {
+        :focus {
+          outline: 2px dashed rgba(0, 0, 0, 0.2);
+        }
       }
     }
   }
@@ -45,12 +58,12 @@ const Styles = styled.div`
 const emptyRow = { startTime: "", endTime: "", word: "" };
 
 function NewLessonTable(props) {
-  const { toggleNewLessonSource } = props.multiCardActions;
+  const { toggleNewLessonSource, updatePosition } = props.multiCardActions;
   const { isSourcePlaying, currentCard } = props.multiCardState;
 
   const { data, setData } = props;
 
-  const columns = React.useMemo(
+  const columns = useMemo(
     () => [
       {
         Header: "Word",
@@ -89,12 +102,12 @@ function NewLessonTable(props) {
       },
 
       {
-        Header: "delete",
+        Header: "Remove",
         Cell: (cellProps) => {
           const { row, deleteRow } = cellProps;
           return (
             <button disabled onClick={() => deleteRow(row.index)} on>
-              remove
+              x
             </button>
           );
         },
@@ -103,9 +116,6 @@ function NewLessonTable(props) {
 
     [isSourcePlaying]
   );
-
-  //   const [data, setData] = React.useState(() => makeData(20))
-  //   const [data, setData] = React.useState([emptyRow]);
 
   const [originalData] = React.useState(data);
   const [skipPageReset, setSkipPageReset] = React.useState(false);
@@ -152,18 +162,19 @@ function NewLessonTable(props) {
     setData(newData);
   };
 
-  // console.log(data);
   return (
     <Styles>
-      <button onClick={resetData}>Clear table</button>
-      <button onClick={() => setData([...data, emptyRow])}>Add row</button>
-
+      <div>
+        <button onClick={resetData}>Clear table</button>
+        <button onClick={() => setData([...data, emptyRow])}>Add row</button>
+      </div>
       <EditableTable
         columns={columns}
         data={data}
         updateMyData={updateMyData}
         skipPageReset={skipPageReset}
         deleteRow={deleteRow}
+        updateCardNumber={(cardIndex) => updatePosition(cardIndex)}
       />
     </Styles>
   );

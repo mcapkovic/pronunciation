@@ -1,0 +1,16 @@
+.shortcuts{
+    margin: 1em auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__item{
+        display: flex;
+        align-items: center;
+
+        margin-left: 2em;
+        &:first-child{
+            margin-left: 0;
+        }
+    }
+}
