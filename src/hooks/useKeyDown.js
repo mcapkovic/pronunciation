@@ -6,7 +6,6 @@ export function useKeyDown(targetKey, callback) {
 
   // If pressed key is our target key then set to true
   function downHandler({ key }) {
-    console.log(targetKey);
     lastPressedKey.current = key;
     if (key === targetKey && callback) {
       callback();

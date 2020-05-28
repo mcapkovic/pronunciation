@@ -3,13 +3,7 @@ import { useGetKey } from "../hooks/useGetKey";
 import { useKeyDown } from "../hooks/useKeyDown";
 
 function Shortcuts(props) {
-  const {
-    toggleNewLessonSource,
-    updatePosition,
-    toggleSourcePlay,
-  } = props.multiCardActions;
-
-  console.log(props);
+  const { toggleSourcePlay } = props.multiCardActions;
   const [trigger, setTrigger] = useState("/");
 
   useKeyDown(trigger, () => {
