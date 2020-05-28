@@ -39,6 +39,8 @@ function NewLesson(props) {
 
   return (
     <>
+      <Shortcuts multiCardActions={multiCardActions} />
+
       <Player
         lesson={lesson}
         multiCardActions={multiCardActions}
@@ -47,8 +49,6 @@ function NewLesson(props) {
         height={360}
         width="100%"
       />
-
-      <Shortcuts multiCardActions={multiCardActions} />
 
       <NewLessonTable
         data={data}

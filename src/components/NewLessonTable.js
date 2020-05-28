@@ -1,5 +1,7 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import styled from "styled-components";
+import { faPlay, faStop } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EditableTable from "./EditableTable";
 
 const Styles = styled.div`
@@ -43,6 +45,7 @@ const Styles = styled.div`
       }
 
       button {
+        width: 100%;
         :focus {
           outline: 2px dashed rgba(0, 0, 0, 0.2);
         }
@@ -55,6 +58,20 @@ const Styles = styled.div`
   }
 `;
 
+const ActionsToolbar = styled.div`
+  display: flex;
+`;
+
+const RemoveControls = styled.div`
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  label {
+    margin-left: 5px;
+    margin-right: 15px;
+  }
+`;
+
 const emptyRow = { startTime: "", endTime: "", word: "" };
 
 function NewLessonTable(props) {
@@ -62,6 +79,7 @@ function NewLessonTable(props) {
   const { isSourcePlaying, currentCard } = props.multiCardState;
 
   const { data, setData } = props;
+  const [isRemoveDisabled, setIsRemoveDisabled] = useState(true);
 
   const columns = useMemo(
     () => [
@@ -84,10 +102,15 @@ function NewLessonTable(props) {
           const { row } = cellProps;
 
           return (
-            <button onClick={() => toggleNewLessonSource(row.index)} on>
-              {isSourcePlaying && cellProps.row.index === currentCard
-                ? "stop"
-                : "play"}
+            <button
+              onClick={() => toggleNewLessonSource(row.index)}
+              on
+            >
+              {isSourcePlaying && cellProps.row.index === currentCard ? (
+                <FontAwesomeIcon icon={faStop} />
+              ) : (
+                <FontAwesomeIcon icon={faPlay} />
+              )}
             </button>
           );
         },
@@ -106,7 +129,11 @@ function NewLessonTable(props) {
         Cell: (cellProps) => {
           const { row, deleteRow } = cellProps;
           return (
-            <button disabled onClick={() => deleteRow(row.index)} on>
+            <button
+              disabled={isRemoveDisabled}
+              onClick={() => deleteRow(row.index)}
+              on
+            >
               x
             </button>
           );
@@ -114,11 +141,11 @@ function NewLessonTable(props) {
       },
     ],
 
-    [isSourcePlaying]
+    [isSourcePlaying, isRemoveDisabled]
   );
 
-  const [originalData] = React.useState(data);
-  const [skipPageReset, setSkipPageReset] = React.useState(false);
+  const [originalData] = useState(data);
+  const [skipPageReset, setSkipPageReset] = useState(false);
 
   // We need to keep the table from resetting the pageIndex when we
   // Update data. So we can keep track of that flag with a ref.
@@ -145,7 +172,7 @@ function NewLessonTable(props) {
   // After data chagnes, we turn the flag back off
   // so that if data actually changes when we're not
   // editing it, the page is reset
-  React.useEffect(() => {
+  useEffect(() => {
     setSkipPageReset(false);
   }, [data]);
 
@@ -164,10 +191,21 @@ function NewLessonTable(props) {
 
   return (
     <Styles>
-      <div>
-        <button onClick={resetData}>Clear table</button>
+      <ActionsToolbar>
         <button onClick={() => setData([...data, emptyRow])}>Add row</button>
-      </div>
+        <RemoveControls>
+          <input
+            id="enable-del"
+            type="checkbox"
+            onChange={(e) => setIsRemoveDisabled(!e.target.checked)}
+            checked={!isRemoveDisabled}
+          />
+          <label htmlFor="enable-del">Danger zone</label>
+          <button disabled={isRemoveDisabled} onClick={resetData}>
+            Clear table
+          </button>
+        </RemoveControls>
+      </ActionsToolbar>
       <EditableTable
         columns={columns}
         data={data}
