@@ -39,7 +39,11 @@ function NewLesson(props) {
 
   return (
     <>
-      <Shortcuts multiCardActions={multiCardActions} />
+      <Shortcuts
+        multiCardActions={multiCardActions}
+        multiCardState={multiCardState}
+        source
+      />
 
       <Player
         lesson={lesson}

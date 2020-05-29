@@ -3,6 +3,7 @@ import words from "./words.json";
 import MultiCard from "./components/MultiCard";
 import NewLesson from './components/NewLesson';
 import MainPage from './components/Dashboard';
+import RecorderPage from './components/RecorderPage';
 import MainNavigation from './components/MainNavigation';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./sass/main.scss";
@@ -24,6 +25,9 @@ function App() {
         </Route>
         <Route path="/quick-practice">
           <MainPage />
+        </Route>
+        <Route path="/recorder">
+          <RecorderPage />
         </Route>
         <Route path="/">
           <MainPage lessons={lessons}/>
