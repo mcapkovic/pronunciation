@@ -5,11 +5,14 @@ import NewLesson from './components/NewLesson';
 import MainPage from './components/Dashboard';
 import RecorderPage from './components/RecorderPage';
 import MainNavigation from './components/MainNavigation';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import QuickPractice from './components/QuickPractice';
+import QuickPracticePlayer from './components/QuickParacticePlayer';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./sass/main.scss";
 
 function App() {
   const lessons = words;
+
   return (
     <Router>
       <MainNavigation />
@@ -24,10 +27,14 @@ function App() {
           <MainPage lessons={lessons}/>
         </Route>
         <Route path="/quick-practice">
-          <MainPage />
+          <QuickPractice />
         </Route>
         <Route path="/recorder">
           <RecorderPage />
+        </Route>
+
+        <Route path="/quick-practice-player">
+          <QuickPracticePlayer />
         </Route>
         <Route path="/">
           <MainPage lessons={lessons}/>
