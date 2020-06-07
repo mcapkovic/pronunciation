@@ -1,0 +1,21 @@
+.basic-controls {
+    display: flex;
+    justify-content: center;
+
+    &__source {
+      margin-right: 30px;
+      flex-direction: column;
+      display: flex;
+      text-align: center;
+      &__label {
+        margin-top: 5px;
+      }
+    }
+    &__record {
+      &__label {
+        display: block;
+        text-align: center;
+        margin-top: 5px;
+      }
+    }
+  }
