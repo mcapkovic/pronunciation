@@ -17,9 +17,9 @@ function Shortcuts(props) {
     setRecording,
   } = props.multiCardActions;
   const { isRecording = null } = props.multiCardState;
-  const [triggerSource, setTriggerSource] = useState("=");
-  const [triggerRecording, setTriggerRecording] = useState("[");
-  const [triggerRecord, setTriggerRecord] = useState("]");
+  const [triggerSource, setTriggerSource] = useState("a");
+  const [triggerRecording, setTriggerRecording] = useState("s");
+  const [triggerRecord, setTriggerRecord] = useState("d");
 
   useKeyDown(triggerSource, () => {
     toggleSourcePlay();
