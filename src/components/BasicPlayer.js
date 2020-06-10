@@ -68,7 +68,7 @@ function BasicPlayer(props) {
   useKeyDown(
     "ArrowUp",
     () => {
-      setRewindAmount(rewindAmount + 1);
+      setRewindAmount(+rewindAmount + 1);
     },
     [rewindAmount]
   );
@@ -76,11 +76,11 @@ function BasicPlayer(props) {
   useKeyDown(
     "ArrowDown",
     () => {
-      setRewindAmount(rewindAmount - 1);
+      if (rewindAmount > 1) setRewindAmount(+rewindAmount - 1);
     },
     [rewindAmount]
   );
-console.log(playerState)
+  console.log(playerState);
   return (
     <>
       {props.url && (
@@ -103,12 +103,9 @@ console.log(playerState)
           {...playerProps}
         />
       )}
+
       <input
-        type="number"
-        value={rewindAmount}
-        onChange={(e) => setRewindAmount(e.target.value)}
-      />
-      <input
+        style={{ width: "100%" }}
         type="range"
         min={0}
         max={0.999999}
@@ -118,9 +115,22 @@ console.log(playerState)
         onChange={handleSeekChange}
         onMouseUp={handleSeekMouseUp}
       />
+      <div style={{ display: "flex" }}>
+    
       <button onClick={handleGoBack}>-{rewindAmount}</button>
+      <input
+        min='1'
+        type="number"
+        value={rewindAmount}
+        onChange={(e) => setRewindAmount(e.target.value)}
+      />
       <button onClick={handleForward}>+{rewindAmount}</button>
-      {Math.floor(playerState.playedSeconds)} /{duration}
+
+      <span style={{ marginLeft: "auto" }}>
+        {Math.floor(playerState.playedSeconds)} /{duration}
+      </span>
+      </div>
+
     </>
   );
 }
