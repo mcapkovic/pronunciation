@@ -10,8 +10,6 @@ function BasicPlayer(props) {
 
   // const [triggerX, setTriggerRecord] = useState("x");
 
- 
-
   const [playerState, setPlayerState] = useState({
     url: null,
     pip: false,
@@ -27,7 +25,8 @@ function BasicPlayer(props) {
     seeking: false,
   });
 
-  const [duration, setDuration] = useState(0)
+  const [duration, setDuration] = useState(0);
+  const [rewindAmount, setRewindAmount] = useState(1);
 
   const handleProgress = (state) => {
     // We only want to update time slider if we are not currently seeking
@@ -46,17 +45,42 @@ function BasicPlayer(props) {
   };
 
   const handleGoBack = (e) => {
-    player.current.seekTo(playerState.played - (2 / duration));
+    const newPosition = playerState.played - rewindAmount / duration;
+    setPlayerState({ ...playerState, played: newPosition });
+    player.current.seekTo(newPosition);
+  };
+
+  const handleForward = (e) => {
+    const newPosition = playerState.played + rewindAmount / duration;
+    setPlayerState({ ...playerState, played: newPosition });
+    player.current.seekTo(newPosition);
   };
 
   const handleDuration = (newDuration) => {
     setDuration(newDuration);
   };
 
-  useKeyDown('ArrowLeft', () => {
-    handleGoBack();
-  }, [duration, playerState]);
+  useKeyDown("ArrowLeft", handleGoBack, [duration, playerState]);
+  useKeyDown("ArrowRight", handleForward, [duration, playerState]);
+  // useKeyDown("ArrowUp", handleForward, [duration, playerState]);
+  // useKeyDown("ArrowDown", handleForward, [duration, playerState]);
 
+  useKeyDown(
+    "ArrowUp",
+    () => {
+      setRewindAmount(rewindAmount + 1);
+    },
+    [rewindAmount]
+  );
+
+  useKeyDown(
+    "ArrowDown",
+    () => {
+      setRewindAmount(rewindAmount - 1);
+    },
+    [rewindAmount]
+  );
+console.log(playerState)
   return (
     <>
       {props.url && (
@@ -80,6 +104,11 @@ function BasicPlayer(props) {
         />
       )}
       <input
+        type="number"
+        value={rewindAmount}
+        onChange={(e) => setRewindAmount(e.target.value)}
+      />
+      <input
         type="range"
         min={0}
         max={0.999999}
@@ -89,7 +118,9 @@ function BasicPlayer(props) {
         onChange={handleSeekChange}
         onMouseUp={handleSeekMouseUp}
       />
-      <button onClick={handleGoBack}>-2</button>
+      <button onClick={handleGoBack}>-{rewindAmount}</button>
+      <button onClick={handleForward}>+{rewindAmount}</button>
+      {Math.floor(playerState.playedSeconds)} /{duration}
     </>
   );
 }
