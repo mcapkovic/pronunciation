@@ -105,6 +105,7 @@ function BasicPlayer(props) {
       )}
 
       <input
+        onKeyDown={(event) => event.preventDefault()}
         style={{ width: "100%" }}
         type="range"
         min={0}
@@ -116,21 +117,20 @@ function BasicPlayer(props) {
         onMouseUp={handleSeekMouseUp}
       />
       <div style={{ display: "flex" }}>
-    
-      <button onClick={handleGoBack}>-{rewindAmount}</button>
-      <input
-        min='1'
-        type="number"
-        value={rewindAmount}
-        onChange={(e) => setRewindAmount(e.target.value)}
-      />
-      <button onClick={handleForward}>+{rewindAmount}</button>
+        <button onClick={handleGoBack}>-{rewindAmount}</button>
+        <input
+          onKeyDown={(event) => event.preventDefault()}
+          min="1"
+          type="number"
+          value={rewindAmount}
+          onChange={(e) => setRewindAmount(e.target.value)}
+        />
+        <button onClick={handleForward}>+{rewindAmount}</button>
 
-      <span style={{ marginLeft: "auto" }}>
-        {Math.floor(playerState.playedSeconds)} /{duration}
-      </span>
+        <span style={{ marginLeft: "auto" }}>
+          {Math.floor(playerState.playedSeconds)} /{duration}
+        </span>
       </div>
-
     </>
   );
 }

@@ -27,7 +27,7 @@ function QuickPracticePlayer() {
         url={url}
         multiCardActions={multiCardActions}
         multiCardState={multiCardState}
-        controls
+        // controls
         height={360}
         width="100%"
       />
