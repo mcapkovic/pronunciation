@@ -27,6 +27,9 @@ function BasicPlayer(props) {
 
   const [duration, setDuration] = useState(0);
   const [rewindAmount, setRewindAmount] = useState(1);
+  const [timePin, setTimePin] = useState(0);
+  const [isTimePinOn, setIsTimePinOn] = useState(false);
+
 
   const handleProgress = (state) => {
     // We only want to update time slider if we are not currently seeking
@@ -80,7 +83,34 @@ function BasicPlayer(props) {
     },
     [rewindAmount]
   );
-  console.log(playerState);
+
+  useEffect(()=>{
+
+    if(isSourcePlaying || !isTimePinOn) return;
+
+    console.log('timepin', timePin)
+    const newPosition = timePin/ duration;
+
+    setPlayerState({ ...playerState, played: newPosition });
+    player.current.seekTo(newPosition);
+
+  },[isSourcePlaying,timePin])
+
+  useKeyDown(
+    "q",
+    () => {
+      setIsTimePinOn(!isTimePinOn)
+    },
+    [isTimePinOn]
+  );
+  useKeyDown(
+    "w",
+    () => {
+      // console.log(playerState)
+      setTimePin(playerState.playedSeconds)
+    },
+    [playerState.playedSeconds]
+  );
   return (
     <>
       {props.url && (
@@ -131,6 +161,9 @@ function BasicPlayer(props) {
           {Math.floor(playerState.playedSeconds)} /{duration}
         </span>
       </div>
+
+      <input type='number' disabled={!isTimePinOn} value={timePin} onChange={e=> setTimePin(e.target.value)} />
+      <button onClick={()=> setIsTimePinOn(!isTimePinOn)}>toggle time pin</button>
     </>
   );
 }
