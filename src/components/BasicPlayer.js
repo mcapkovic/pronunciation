@@ -1,6 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useKeyDown } from "../hooks/useKeyDown";
+import { faBookmark, faThumbtack } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark as faBookmarkRegular } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function BasicPlayer(props) {
   const { multiCardActions, multiCardState, ...playerProps } = props;
@@ -27,9 +30,11 @@ function BasicPlayer(props) {
 
   const [duration, setDuration] = useState(0);
   const [rewindAmount, setRewindAmount] = useState(1);
-  const [timePin, setTimePin] = useState(0);
+  const [bookmark, setBookmark] = useState(0);
   const [isTimePinOn, setIsTimePinOn] = useState(false);
-
+  const [bookmarkPosition, setBookmarkPosition] = useState(0);
+  const [bookmarkOffset, setBookmarkOffset] = useState(0.5);
+  const [volume, setVolume] = useState(0.5);
 
   const handleProgress = (state) => {
     // We only want to update time slider if we are not currently seeking
@@ -63,13 +68,13 @@ function BasicPlayer(props) {
     setDuration(newDuration);
   };
 
-  useKeyDown("ArrowLeft", handleGoBack, [duration, playerState]);
-  useKeyDown("ArrowRight", handleForward, [duration, playerState]);
+  useKeyDown("j", handleGoBack, [duration, playerState]);
+  useKeyDown("l", handleForward, [duration, playerState]);
   // useKeyDown("ArrowUp", handleForward, [duration, playerState]);
   // useKeyDown("ArrowDown", handleForward, [duration, playerState]);
 
   useKeyDown(
-    "ArrowUp",
+    "i",
     () => {
       setRewindAmount(+rewindAmount + 1);
     },
@@ -77,45 +82,42 @@ function BasicPlayer(props) {
   );
 
   useKeyDown(
-    "ArrowDown",
+    "k",
     () => {
       if (rewindAmount > 1) setRewindAmount(+rewindAmount - 1);
     },
     [rewindAmount]
   );
 
-  useEffect(()=>{
+  const setBookmarkTime = () => {
+    const rounded = Math.round(playerState.playedSeconds * 10) / 10;
+    setBookmarkPosition(playerState.played);
+    setBookmark(rounded);
+  };
 
-    if(isSourcePlaying || !isTimePinOn) return;
+  useEffect(() => {
+    if (isSourcePlaying || !isTimePinOn) return;
 
-    console.log('timepin', timePin)
-    const newPosition = timePin/ duration;
+    const newPosition = bookmark / duration;
 
     setPlayerState({ ...playerState, played: newPosition });
     player.current.seekTo(newPosition);
-
-  },[isSourcePlaying,timePin])
+  }, [isSourcePlaying]);
 
   useKeyDown(
     "q",
     () => {
-      setIsTimePinOn(!isTimePinOn)
+      setIsTimePinOn(!isTimePinOn);
     },
     [isTimePinOn]
   );
-  useKeyDown(
-    "w",
-    () => {
-      // console.log(playerState)
-      setTimePin(playerState.playedSeconds)
-    },
-    [playerState.playedSeconds]
-  );
+  useKeyDown("w", setBookmarkTime, [playerState.playedSeconds]);
+
   return (
     <>
       {props.url && (
         <ReactPlayer
-          className="source-player"
+          className="basic-player"
           ref={player}
           // controls
           playing={isSourcePlaying}
@@ -130,26 +132,83 @@ function BasicPlayer(props) {
           volume={sourceVolume}
           height={180}
           width={320}
+          volume={volume}
           {...playerProps}
         />
       )}
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ width: "70px" }}>
+          <button onClick={() => setIsTimePinOn(!isTimePinOn)}>
+            {isTimePinOn ? (
+              <FontAwesomeIcon icon={faBookmark} color="gray" />
+            ) : (
+              <FontAwesomeIcon icon={faBookmarkRegular} color="gray" />
+            )}
+          </button>
 
-      <input
-        onKeyDown={(event) => event.preventDefault()}
-        style={{ width: "100%" }}
-        type="range"
-        min={0}
-        max={0.999999}
-        step="any"
-        value={playerState.played}
-        onMouseDown={() => setPlayerState({ ...playerState, seeking: true })}
-        onChange={handleSeekChange}
-        onMouseUp={handleSeekMouseUp}
-      />
+          <button disabled={!isTimePinOn} onClick={setBookmarkTime}>
+            <FontAwesomeIcon icon={faThumbtack} />
+          </button>
+        </div>
+
+        <div style={{ flexGrow: 1, height: "60px" }}>
+          <input
+            className={`basic-player__bookmark-slider basic-player__bookmark-slider--${
+              isTimePinOn ? "visible" : "hidden"
+            }`}
+            // onKeyDown={(event) => event.preventDefault()}
+            style={{ width: "100%" }}
+            type="range"
+            min={0}
+            max={0.999999}
+            step="any"
+            value={bookmarkPosition}
+            onChange={(e) => setBookmarkPosition(e.target.value)}
+            // onMouseDown={() => setPlayerState({ ...playerState, seeking: true })}
+            // onChange={handleSeekChange}
+            // onMouseUp={handleSeekMouseUp}
+          />
+
+          <input
+            className="basic-player__position-slider"
+            // onKeyDown={(event) => event.preventDefault()}
+            style={{ width: "100%" }}
+            type="range"
+            min={0}
+            max={0.999999}
+            step="any"
+            value={playerState.played}
+            onMouseDown={() =>
+              setPlayerState({ ...playerState, seeking: true })
+            }
+            onChange={handleSeekChange}
+            onMouseUp={handleSeekMouseUp}
+          />
+        </div>
+
+        {/* <span style={{ marginLeft: "auto" }}>
+          {Math.floor(playerState.playedSeconds)} /{duration}
+        </span> */}
+
+        <input
+          // className={`basic-player__bookmark-slider basic-player__bookmark-slider--${
+          //   isTimePinOn ? "visible" : "hidden"
+          // }`}
+          // onKeyDown={(event) => event.preventDefault()}
+          style={{ width: "5em" }}
+          type="range"
+          min={0}
+          max={0.999999}
+          step="any"
+          value={volume}
+          onChange={(e) => setVolume(e.target.value)}
+        />
+      </div>
+
       <div style={{ display: "flex" }}>
         <button onClick={handleGoBack}>-{rewindAmount}</button>
         <input
-          onKeyDown={(event) => event.preventDefault()}
+          // onKeyDown={(event) => event.preventDefault()}
           min="1"
           type="number"
           value={rewindAmount}
@@ -157,13 +216,30 @@ function BasicPlayer(props) {
         />
         <button onClick={handleForward}>+{rewindAmount}</button>
 
-        <span style={{ marginLeft: "auto" }}>
+        {/* <span style={{ marginLeft: "auto" }}>
           {Math.floor(playerState.playedSeconds)} /{duration}
-        </span>
+        </span> */}
       </div>
 
-      <input type='number' disabled={!isTimePinOn} value={timePin} onChange={e=> setTimePin(e.target.value)} />
-      <button onClick={()=> setIsTimePinOn(!isTimePinOn)}>toggle time pin</button>
+      <label>
+        bookmark offset
+        <input
+          type="number"
+          disabled={!isTimePinOn}
+          value={bookmarkOffset}
+          onChange={(e) => setBookmarkOffset(e.target.value)}
+        />
+      </label>
+      {/* <label>
+        bookmark time
+        <input
+          type="number"
+          disabled={!isTimePinOn}
+          value={bookmark}
+          onChange={(e) => setBookmark(e.target.value)}
+        />
+      </label> */}
+      <br />
     </>
   );
 }

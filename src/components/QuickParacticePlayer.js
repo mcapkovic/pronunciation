@@ -29,7 +29,7 @@ function QuickPracticePlayer() {
         multiCardState={multiCardState}
         // controls
         height={360}
-        width="100%"
+        width={640}
       />
 
      <BasicControls
